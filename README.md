@@ -7,8 +7,6 @@ The environment consists of a dedicated Debian Linux server hosting osTicket, ba
 
 This lab represents **Phase 1** of a multi-phase support infrastructure build. The current deployment operates as a standalone helpdesk system and is designed to be integrated with an existing Active Directory environment in a future phase.
 
----
-
 ## Lab Environment
 - **Hypervisor:** Oracle VirtualBox  
 - **Operating System:** Debian GNU/Linux 12 (Bookworm)  
@@ -17,8 +15,6 @@ This lab represents **Phase 1** of a multi-phase support infrastructure build. T
 - **Application Stack:** PHP 8.2  
 - **Ticketing Platform:** osTicket v1.18.x  
 
----
-
 ## Core Components
 - osTicket helpdesk platform
 - Apache web server hosting PHP-based application
@@ -26,8 +22,6 @@ This lab represents **Phase 1** of a multi-phase support infrastructure build. T
 - Linux-based server administration
 - Web-based user and agent interfaces
 - Role-based agent access within osTicket
-
----
 
 ## Architecture & Design
 
@@ -40,8 +34,6 @@ The osTicket deployment follows a traditional single-host application architectu
 - Separation between user portal and agent/admin interface
 
 The environment was intentionally kept simple in Phase 1 to ensure stability, clarity, and ease of troubleshooting before introducing external integrations.
-
----
 
 ## Security & Access Model
 
@@ -66,8 +58,6 @@ Access within the osTicket environment is designed to reflect real-world service
 
 This layered access model ensures clear separation between users, support staff, and system administrators.
 
----
-
 ## Support Workflow
 
 The lab implements a structured helpdesk workflow designed to mirror real-world IT support operations.
@@ -91,8 +81,6 @@ The lab implements a structured helpdesk workflow designed to mirror real-world 
 
 This workflow demonstrates core service desk operations commonly used in desktop support and NOC environments.
 
----
-
 ## Installation & Configuration Summary
 
 High-level deployment steps included:
@@ -107,8 +95,6 @@ High-level deployment steps included:
 
 Detailed step-by-step procedures and configuration notes are documented in the `/docs` directory.
 
----
-
 ## Troubleshooting & Lessons Learned
 
 During deployment, several real-world issues were encountered and resolved, including:
@@ -120,16 +106,12 @@ During deployment, several real-world issues were encountered and resolved, incl
 
 These issues were resolved through log analysis, dependency validation, and controlled configuration changes rather than reinstallation, reflecting real-world troubleshooting practices.
 
----
-
 ## Validation
 The deployment was validated by:
 - Successful access to the user ticket submission portal
 - Successful access to the agent and admin control panel
 - Creation and resolution of test tickets
 - Verification of system stability after service restarts
-
----
 
 ## Future Enhancements (Phase 2)
 Planned improvements include:
@@ -140,12 +122,8 @@ Planned improvements include:
 - Backup and recovery planning
 - Integration with existing Active Directory home lab
 
----
-
 ## Documentation
 Supporting documentation, configuration notes, and screenshots are available in the `/docs` and `/screenshots` directories.
-
----
 
 ## Skills Demonstrated
 - Linux server administration (Debian)
