@@ -1,138 +1,135 @@
-# osTicket Helpdesk Home Lab
+# osTicket Helpdesk Home Lab (Enterprise Simulation)
 
 ## Overview
-This project is a fully functional **osTicket helpdesk deployment** designed to simulate a real-world IT service desk environment. The goal of this lab is to gain hands-on experience with ticket-based support workflows, Linux server administration, web application deployment, and backend service integration commonly used in enterprise IT environments.
+This project is a fully implemented **osTicket helpdesk deployment** designed to simulate a real-world enterprise IT service desk integrated with Active Directory. The lab demonstrates end-to-end service desk operations including centralized authentication, role-based access control, SLA-driven workflows, and realistic ticket lifecycles aligned with desktop support and NOC-style environments.
 
-The environment consists of a dedicated Debian Linux server hosting osTicket, backed by an Apache web server, PHP application stack, and MariaDB database. The system provides both a user-facing ticket submission portal and an agent/admin interface used to manage, triage, and resolve support requests.
-
-This lab represents **Phase 1** of a multi-phase support infrastructure build. The current deployment operates as a standalone helpdesk system and is designed to be integrated with an existing Active Directory environment in a future phase.
+The environment mirrors how a small-to-mid-size organization might deploy and operate a production helpdesk platform. Emphasis is placed on security, operational workflows, and documentation quality rather than basic application installation.
 
 ## Lab Environment
 - **Hypervisor:** Oracle VirtualBox  
 - **Operating System:** Debian GNU/Linux 12 (Bookworm)  
 - **Web Server:** Apache 2  
-- **Database:** MariaDB  
 - **Application Stack:** PHP 8.2  
+- **Database:** MariaDB  
 - **Ticketing Platform:** osTicket v1.18.x  
-
-## Core Components
-- osTicket helpdesk platform
-- Apache web server hosting PHP-based application
-- MariaDB backend database
-- Linux-based server administration
-- Web-based user and agent interfaces
-- Role-based agent access within osTicket
+- **Directory Services:** Microsoft Active Directory  
+- **Authentication:** LDAP over SSL (LDAPS)
 
 ## Architecture & Design
+The deployment follows a centralized, single-application server model commonly used in enterprise support environments:
 
-The osTicket deployment follows a traditional single-host application architecture commonly used in small to mid-sized environments:
-
-- One dedicated Linux server
-- Apache serving osTicket over HTTP
+- Dedicated Debian Linux server hosting osTicket
+- Apache serving the web application
 - PHP handling application logic
-- MariaDB storing ticket, user, and configuration data
-- Separation between user portal and agent/admin interface
+- MariaDB providing persistent data storage
+- Windows Active Directory providing centralized identity management
+- Secure LDAPS communication for authentication
 
-The environment was intentionally kept simple in Phase 1 to ensure stability, clarity, and ease of troubleshooting before introducing external integrations.
+The architecture prioritizes operational realism while maintaining enterprise-aligned security practices.
 
-## Security & Access Model
+## Authentication & Identity Integration
+The helpdesk is fully integrated with Active Directory using **LDAP over SSL (LDAPS)** to provide centralized authentication and identity consistency.
 
-Access within the osTicket environment is designed to reflect real-world service desk operations while maintaining appropriate separation of responsibilities.
+### Active Directory Configuration
+- **Domain:** lab.local  
+- **Domain Controller:** dc01.lab.local  
+- **LDAPS Port:** 636  
+- **Service Account:** svc_osticket@lab.local  
 
-### User Access
-- End users access the helpdesk via the web-based ticket submission portal
-- Users can create, view, and respond to their own tickets
-- No server or administrative access is granted to users
+The Debian server trusts the internal Microsoft Certificate Authority, ensuring encrypted and validated directory communication.
 
-### Agent and Admin Access
-- Support agents authenticate through the osTicket agent control panel
-- Administrative access is restricted to designated admin accounts
-- Configuration changes are limited to the admin interface
-- Backend system access (Linux, database) is restricted to server administrators only
+### Authentication Model
+- End users authenticate using Active Directory credentials
+- Support agents authenticate using Active Directory accounts
+- The service account is restricted to directory read operations
+- All directory communication is encrypted using TLS
 
-### Server Security
-- Database access is limited to a dedicated application user
-- Database credentials are not shared with system users
-- Configuration files are locked down post-installation
-- Unused installation components are removed after setup
+## Role-Based Access Control (RBAC)
+Access within osTicket is controlled through departments, roles, and permission sets designed to enforce separation of duties.
 
-This layered access model ensures clear separation between users, support staff, and system administrators.
+### Defined Roles
+- **Tier 1 Support**
+  - User-facing ticket handling
+  - Basic troubleshooting and resolution
+- **Tier 2 Support**
+  - Ticket escalation and reassignment
+  - Priority and SLA adjustments
+- **NOC / Infrastructure**
+  - Infrastructure-focused ticket queues
+  - Limited exposure to user data
+- **Administrator**
+  - Full system configuration and management
 
-## Support Workflow
+Roles are mapped to departments and reflect typical enterprise service desk structures.
 
-The lab implements a structured helpdesk workflow designed to mirror real-world IT support operations.
+## Helpdesk Workflows
+
+### Ticket Intake
+- Web-based user portal authenticated via Active Directory
+- Categorized help topics aligned with enterprise service catalogs
+- Department-based ticket routing
 
 ### Ticket Lifecycle
-- Users submit tickets through the web portal
-- Tickets are categorized using help topics and departments
-- Agents review, respond to, and resolve tickets
-- Tickets are closed once issues are resolved
+1. Ticket submission
+2. Automatic categorization and routing
+3. Agent assignment
+4. User communication and internal notes
+5. Escalation or reassignment as required
+6. Resolution and closure
+7. Automated post-resolution handling
 
-### Agent Capabilities
-- View and manage assigned tickets
-- Communicate with users through ticket threads
-- Update ticket status and resolution notes
-- Escalate or reassign tickets as needed
+### Service Level Agreements (SLAs)
+- Priority-based SLAs (P1–P3)
+- Response and resolution targets
+- SLA enforcement based on ticket category and department
 
-### Operational Design
-- Centralized ticket queue for support visibility
-- Clear separation between user-facing and agent-facing interfaces
-- Consistent workflow regardless of ticket type
+## Security Considerations
 
-This workflow demonstrates core service desk operations commonly used in desktop support and NOC environments.
+### Application Security
+- Role-based permission enforcement
+- Separation of user, agent, and admin interfaces
+- Removal of installation artifacts post-deployment
 
-## Installation & Configuration Summary
+### Server Security
+- Dedicated database user for osTicket
+- Restricted file permissions and ownership
+- Service isolation between Apache, database, and system users
 
-High-level deployment steps included:
-1. Installing Debian 12 with a minimal configuration
-2. Installing and configuring Apache, PHP, and MariaDB
-3. Securing the database using vendor-recommended hardening tools
-4. Creating a dedicated database and user for osTicket
-5. Deploying osTicket into the Apache web root
-6. Completing the web-based installer
-7. Performing post-install cleanup and permission hardening
-8. Validating application functionality through test tickets
+### Directory Security
+- Encrypted LDAPS communication
+- Least-privilege service account usage
+- Certificate-based trust validation
 
-Detailed step-by-step procedures and configuration notes are documented in the `/docs` directory.
+## Validation & Testing
+The deployment was validated through:
+- Successful Active Directory-authenticated user logins
+- Successful agent authentication with role enforcement
+- Creation, routing, escalation, and resolution of test tickets
+- SLA enforcement verification
+- Service restarts without configuration loss
+- Validation of secure LDAPS communication
 
 ## Troubleshooting & Lessons Learned
+Issues were resolved using standard enterprise troubleshooting practices, including:
+- Apache and PHP log analysis
+- PHP extension dependency resolution
+- Database authentication troubleshooting
+- File permission and ownership correction
+- Certificate trust validation for LDAPS
 
-During deployment, several real-world issues were encountered and resolved, including:
-- PHP version and extension compatibility issues
-- Missing IMAP dependency causing installer failures
-- HTTP 500 Internal Server Errors traced via Apache logs
-- Database authentication errors due to credential mismatches
-- File ownership and permission problems affecting configuration files
-
-These issues were resolved through log analysis, dependency validation, and controlled configuration changes rather than reinstallation, reflecting real-world troubleshooting practices.
-
-## Validation
-The deployment was validated by:
-- Successful access to the user ticket submission portal
-- Successful access to the agent and admin control panel
-- Creation and resolution of test tickets
-- Verification of system stability after service restarts
-
-## Future Enhancements (Phase 2)
-Planned improvements include:
-- Active Directory / LDAP authentication integration
-- Centralized user authentication for ticket submission
-- Email (SMTP) integration for ticket notifications
-- HTTPS configuration using TLS certificates
-- Backup and recovery planning
-- Integration with existing Active Directory home lab
+Reinstallation was intentionally avoided in favor of controlled troubleshooting.
 
 ## Documentation
 Supporting documentation, configuration notes, and screenshots are available in the `/docs` and `/screenshots` directories.
 
 ## Skills Demonstrated
 - Linux server administration (Debian)
-- Apache web server configuration
-- PHP application deployment and troubleshooting
-- MariaDB database administration
-- Log analysis and error diagnosis
-- Web application security hardening
-- Ticket-based support workflows
-- Service desk operations and documentation
-- Troubleshooting under real-world constraints
-- Technical documentation and system design communication
+- Web application deployment and hardening
+- Apache and PHP configuration
+- MariaDB administration
+- Active Directory integration using LDAPS
+- Role-based access control design
+- Service desk and NOC-style workflows
+- SLA design and enforcement
+- Log analysis and troubleshooting
+- Enterprise technical documentation
