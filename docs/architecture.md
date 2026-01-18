@@ -65,7 +65,7 @@ LDAPS requires the client (Debian/osTicket server) to trust the certificate pres
 
 This design mirrors enterprise environments where internal PKI is used to secure authentication and service-to-service communication.
 
-## Data Flow Diagrams (Text)
+## Data Flow
 
 ### 1) User Ticket Submission (Authenticated User)
 1. User browses to the osTicket web portal on `osticket01`
