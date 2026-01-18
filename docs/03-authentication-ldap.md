@@ -119,6 +119,9 @@ The LDAPS integration was validated by:
 The following screenshots demonstrate secure LDAPS integration and successful Active Directory authentication:
 
 - LDAPS connectivity validation from Debian
+
+[Supporting Screenshits](../screenshots/
+
 - Internal CA trust configuration
 - osTicket LDAP configuration
 - Successful AD-authenticated user and agent logins
