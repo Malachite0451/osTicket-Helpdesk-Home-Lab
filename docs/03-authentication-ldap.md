@@ -114,6 +114,15 @@ The LDAPS integration was validated by:
 - Verification of LDAPS connectivity from Debian to the domain controller
 - Confirmation of trusted certificate chain on the osTicket server
 
+## Supporting Screenshots
+
+The following screenshots demonstrate secure LDAPS integration and successful Active Directory authentication:
+
+- LDAPS connectivity validation from Debian
+- Internal CA trust configuration
+- osTicket LDAP configuration
+- Successful AD-authenticated user and agent logins
+
 ## Common Failure Scenarios
 
 | Issue | Likely Cause |
