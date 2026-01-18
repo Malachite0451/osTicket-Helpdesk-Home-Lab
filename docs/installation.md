@@ -5,8 +5,6 @@ This document outlines the installation and initial deployment of **osTicket** o
 
 Active Directory integration and external service dependencies are intentionally excluded from this phase and will be addressed in Phase 2.
 
----
-
 ## Operating System Selection
 
 **Debian GNU/Linux 12 (Bookworm)** was selected for this deployment based on the following considerations:
@@ -16,8 +14,6 @@ Active Directory integration and external service dependencies are intentionally
 - Common usage in server environments
 
 Earlier testing on newer Debian releases revealed dependency availability issues, reinforcing the importance of selecting a stable, supported platform for production-style deployments.
-
----
 
 ## Base System Preparation
 
@@ -30,8 +26,6 @@ Key decisions:
 
 Post-installation updates were applied to ensure all packages were current before application deployment.
 
----
-
 ## Web and Application Stack Installation
 
 The following components were installed to support the osTicket application:
@@ -42,8 +36,6 @@ The following components were installed to support the osTicket application:
 - **MariaDB** as the backend database
 
 All services were enabled and configured to start automatically to ensure persistence across reboots.
-
----
 
 ## Database Configuration
 
@@ -56,8 +48,6 @@ A dedicated database and database user were created for osTicket:
 
 Database access was verified prior to application installation to prevent runtime authentication failures.
 
----
-
 ## osTicket Deployment
 
 The osTicket application was deployed manually to ensure transparency and control over file placement and permissions.
@@ -69,8 +59,6 @@ Deployment steps included:
 - Configuring file permissions required for installation
 
 A writable configuration file was prepared exclusively for the duration of the installer process.
-
----
 
 ## Web-Based Installer
 
@@ -85,8 +73,6 @@ Configuration steps included:
 
 Installer execution was monitored using Apache error logs to diagnose and resolve runtime issues.
 
----
-
 ## Post-Installation Hardening
 
 After successful installation, the following security steps were performed:
@@ -96,8 +82,6 @@ After successful installation, the following security steps were performed:
 - Verification of service stability after restart
 
 These steps ensure the application cannot be reconfigured or reinstalled without explicit administrative action.
-
----
 
 ## Validation
 
@@ -111,8 +95,6 @@ The deployment was validated through functional testing:
 
 Successful validation confirmed the system was ready for operational use.
 
----
-
 ## Phase 1 Completion
 
 At the conclusion of Phase 1, the environment met the following criteria:
@@ -122,8 +104,6 @@ At the conclusion of Phase 1, the environment met the following criteria:
 - Documented installation process
 
 The system was snapshotted to preserve a known-good state prior to Phase 2 enhancements.
-
----
 
 ## Next Phase
 
