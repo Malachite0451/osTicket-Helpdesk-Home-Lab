@@ -102,15 +102,8 @@ osTicket → (TLS/LDAPS:636) → dc01.lab.local
 - Directory communication is encrypted using LDAPS to avoid credential exposure.
 - MariaDB is intended to be restricted to local access on `osticket01` where feasible.
 
-## Design Decisions (Why This Architecture)
+## Design Decisions
 - **Single-server osTicket deployment** keeps complexity low while still reflecting common SMB/departmental enterprise setups.
 - **LDAPS integration** reflects real enterprise expectations for secure centralized authentication.
 - **Internal CA trust** mirrors production patterns and demonstrates PKI fundamentals.
 - **VirtualBox isolation** allows safe testing of authentication, RBAC, and workflows without exposing services publicly.
-
-## Future Architecture Enhancements (Optional)
-- Enable HTTPS (TLS) for the osTicket web interface (self-signed or internal CA-issued)
-- Add SMTP integration for ticket notifications
-- Add a separate MariaDB VM to simulate a multi-tier architecture
-- Implement monitoring-generated ticket intake (NOC simulation)
-- Add backup/restore automation and documented recovery testing
