@@ -63,7 +63,7 @@ LDAPS requires the client (Debian/osTicket server) to trust the certificate pres
 - The Debian server is configured to **trust the internal Microsoft CA**.
 - osTicket is configured to bind to AD over `ldaps://` to protect credentials and directory queries in transit.
 
-![Trust and Certificate Model](../screenshots/LDAP-configured.png)
+![Trust and Certificate Model](../screenshots/LDAP-installed.png)
 
 This design mirrors enterprise environments where internal PKI is used to secure authentication and service-to-service communication.
 
