@@ -120,7 +120,7 @@ The following screenshots demonstrate secure LDAPS integration and successful Ac
 
 - LDAPS connectivity validation from Debian
 
-[Supporting Screenshits](../screenshots/
+![Supporting Screenshits](../screenshots/CA-trust)
 
 - Internal CA trust configuration
 - osTicket LDAP configuration
