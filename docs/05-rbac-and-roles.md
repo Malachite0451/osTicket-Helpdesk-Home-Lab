@@ -83,6 +83,8 @@ Initial ticket intake, user communication, and basic troubleshooting.
 - Escalating directly to NOC
 - Administrative configuration changes
 
+![Tier 1](../screenshots/tier1-RBAC.png)
+
 **Security Rationale:**  
 Tier 1 agents handle volume, not authority. Restricting closure and escalation prevents premature resolution and enforces review.
 
@@ -102,6 +104,8 @@ Advanced troubleshooting and escalation handling.
 - No system-wide administrative access
 - No authentication or role configuration changes
 
+![Tier 2](../screenshots/tier2-RBAC.png)
+
 **Security Rationale:**  
 Tier 2 serves as the decision boundary between user-facing support and infrastructure operations.
 
@@ -119,6 +123,8 @@ Operational monitoring and incident response.
 - Responding directly to end users
 - Creating or modifying user tickets
 - Changing SLAs or priorities set by Tier 2
+
+![NOC](../screenshots/NOC-RBAC.png)
 
 **Security Rationale:**  
 NOC focuses on system stability, not customer communication. This separation prevents conflicting actions during incidents.
