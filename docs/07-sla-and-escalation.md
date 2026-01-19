@@ -51,7 +51,6 @@ The helpdesk is structured into clearly defined operational tiers:
 - Performance degradation
 - Incident correlation across systems
 
-This tier is architecturally planned but not yet automated. See *Future Enhancements*.
 
 ## SLA Design Philosophy
 
