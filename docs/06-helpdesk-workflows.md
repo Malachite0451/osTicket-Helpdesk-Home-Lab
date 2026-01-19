@@ -66,6 +66,8 @@ Escalation occurs when:
   - Relevant screenshots or logs
 - Ticket reassigned to Tier 2
 
+![Escalation to Tier 2](../screenshots/escalating.png)
+
 This ensures Tier 2 receives context, not guesswork.
 
 ### 4. Tier 2 Resolution
@@ -80,6 +82,8 @@ This ensures Tier 2 receives context, not guesswork.
 - Close tickets
 - Modify SLAs and priority
 - Escalate to NOC
+
+![Tier 2 Resolution](../screenshots/resolved_escalation.png)
 
 Resolution steps are documented before ticket closure.
 
